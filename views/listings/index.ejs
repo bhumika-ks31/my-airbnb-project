@@ -1,0 +1,31 @@
+<% layout('layouts/boilerplate') %>
+
+<body>
+  <h3 class="mb-4">All Listings</h3>
+
+  <!-- Add New Listing Button -->
+  <div class="mb-4">
+    <a href="/listings/new" class="btn btn-primary">Create New Listing</a>
+  </div>
+
+  <!-- Grid of Cards -->
+  <div class="row">
+    <% for (let listing of allListings) { %>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-0 hover-shadow">
+          <a href="/listings/<%= listing._id %>" class="text-decoration-none text-dark">
+            <img src="<%= listing.image.url %>" class="card-img-top" alt="<%= listing.title %>" style="height: 300px; object-fit: cover;" />
+            <div class="card-body">
+              <h5 class="card-title"><%= listing.title %></h5>
+              <p class="card-text">Price: ₹<%= listing.price.toLocaleString("en-IN") %></p>
+              <span class="btn btn-outline-primary">View Listing</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    <% } %>
+  </div>
+
+  <!-- Optional: Simple list view -->
+
+</body>

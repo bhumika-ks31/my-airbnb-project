@@ -1,0 +1,65 @@
+<% layout('layouts/boilerplate') -%>
+<body>
+    <h3>Listing details </h3>
+
+    <div class="card" style="width: 18rem;">
+        <img src="<%= listing.image.url %>" alt="<%= listing.title %>"class="card-img-top show-img" alt="listing_images">
+        <div class="card-body">
+            <p class="card-text"><b><strong>Title:</strong></b> <%= listing.title %></p>
+        </div>
+    </div>
+
+    <ul>
+
+        <li><strong>Description:</strong> <%= listing.description %></li>
+        <li><strong>Price:</strong> ₹<%= listing.price.toLocaleString("en-IN") %></li>
+        <li><strong>Location:</strong> <%= listing.location %></li>
+        <li><strong>Country:</strong> <%= listing.country %></li>
+    </ul>
+
+    <br>
+
+    <!-- Edit Button -->
+    <a href="/listings/<%= listing._id %>/edit" class="btn btn-warning">Edit</a>
+<br><br>
+    <!-- Delete Form (Fixed Method Attribute) -->
+    <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+
+    <class="col-8 offset-3">
+        <br>
+        <h4>Reviews</h4>
+
+        <form action="/listings/<%= listing._id %>/reviews" method="POST" novalidate class="needs-validation">
+          <div class="mb-3 mt-3">
+            <label for="rating" class="form-label">Rating</label>
+            <input
+              type="range"
+              min="1"
+              max="5"
+              id="rating"
+              name="review[rating]"
+              class="form-range"
+              required
+            />
+          </div>
+        
+          <div class="mb-3 mt-3">
+            <label for="comment" class="form-label">Comments</label>
+            <textarea
+              name="review[comment]"
+              id="comment"
+              cols="30"
+              rows="5"
+              class="form-control"
+              required
+            ></textarea>
+          </div>
+        
+          <button class="btn btn-outline-dark">Submit</button>
+        </form>
+        
+        </div>
+
+        

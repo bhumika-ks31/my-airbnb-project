@@ -1,0 +1,28 @@
+
+<% listings.forEach(function(listing) { %>
+  <div class="listing">
+    <h3><%= listing.title %></h3>
+    <p><strong>Location:</strong> <%= listing.location %></p>
+    <p><strong>Price:</strong> <%= listing.price %></p>
+    <p><strong>Description:</strong> <%= listing.description %></p>
+
+    <form action="/submitReview" method="POST">
+      <input type="hidden" name="listingId" value="<%= listing._id %>">
+      <label for="propertyRating">Property Rating (1-5):</label>
+      <input type="number" name="propertyRating" min="1" max="5" required>
+      <label for="hostRating">Host Rating (1-5):</label>
+      <input type="number" name="hostRating" min="1" max="5" required>
+      <textarea name="reviewText" placeholder="Leave a review..." required></textarea>
+      <button type="submit">Submit Review</button>
+    </form>
+
+    <form action="/book" method="POST">
+      <input type="hidden" name="listingId" value="<%= listing._id %>">
+      <label for="startDate">Start Date:</label>
+      <input type="date" name="startDate" required>
+      <label for="endDate">End Date:</label>
+      <input type="date" name="endDate" required>
+      <button type="submit">Book Now</button>
+    </form>
+  </div>
+<% }); %>

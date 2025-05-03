@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listings</title>
+  <style>
+    .listing, .recommendation {
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+    }
+    .listing h3, .recommendation h3 {
+      margin: 0;
+      font-size: 1.5em;
+    }
+    .listing p, .recommendation p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Available Listings</h1>
+
+  <div>
+    <% listings.forEach(function(listing) { %>
+      <div class="listing">
+        <h3><%= listing.title %></h3>
+        <p><strong>Location:</strong> <%= listing.location %></p>
+        <p><strong>Price:</strong> <%= listing.price %></p>
+        <p><strong>Description:</strong> <%= listing.description %></p>
+      </div>
+    <% }); %>
+  </div>
+
+  <% if (isLoggedIn) { %>
+    <!-- Show recommendations if logged in -->
+    <% if (recommendations.length > 0) { %>
+      <h2>Personalized Travel Recommendations</h2>
+      <div>
+        <% recommendations.forEach(function(dest) { %>
+          <div class="recommendation">
+            <h3><%= dest.name %></h3>
+            <p><strong>Location:</strong> <%= dest.location %></p>
+            <p><strong>Weather:</strong> <%= dest.weather %></p>
+            <p><strong>Activities:</strong> <%= dest.activities.join(', ') %></p>
+          </div>
+        <% }); %>
+      </div>
+    <% } else { %>
+      <p>No personalized recommendations available at the moment.</p>
+    <% } %>
+  <% } else { %>
+    <p>Please log in to see personalized recommendations.</p>
+  <% } %>
+
+</body>
+</html>
